@@ -10,6 +10,12 @@
 # 4. prepare the day name u want to translate as input, example following line 31
 
 # test creating day translator using list
+
+'''
+[CHANGELOG 22 Jan 2024]
+-added monthTranslate function to translate month name (%b) into Indonesian
+
+'''
 from datetime import datetime
 import pandas as pd
 
@@ -25,6 +31,17 @@ def dayTranslate(day_name):
 	dname_ina = df[df.eng_day == dname_eng].ina_day.iloc[0]
 	return dname_eng, dname_ina
 
+def monthTranslate(month_name):
+	# creating dictionary dataframe
+	eng_month = ['Jan','Feb','Mar','Apr','May','Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	ina_month = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'] # Translate for Indonesian day name from English
+	list_tupple = list(zip(eng_month,ina_month))
+	df = pd.DataFrame(list_tupple,columns=['eng_month','ina_month'])
+
+	# translating the day name according to input
+	mname_eng = month_name
+	mname_ina = df[df.eng_month == mname_eng].ina_month.iloc[0]
+	return mname_eng, mname_ina
 
 # test run translate for today's day name
 if __name__ == '__main__':
